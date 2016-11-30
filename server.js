@@ -5,7 +5,7 @@ const express = require('express');
 var mongoClient = require('mongodb').MongoClient;
 
 var connect = function(callback) {
-    mongoClient.connect('mongodb://10.0.0.102:27017/test', function(err, db) {
+    mongoClient.connect('mongodb://db:27017/test', function(err, db) {
         if (err) {
             console.log(err);
         } else {
@@ -54,17 +54,19 @@ var insert = function(res, db) {
 }
 
 var show = function(res, db) {
+    db.collection("cats").find({}).toArray(function(err, data){
+        res.send(data);
+    });
+};
+
+/*
+var show = function(res, db) {
     db.collection("cats").find({}, function(err, docs) {
-        docs.each(function(err, doc) {
-            if(doc) {
-                console.log(doc);
-            }
-            else {
-                res.end();
-            }
-        });
+        console.log(docs);
+        res.json(docs);
     });
 }
+*/
 
 var clean = function(res, db) {
     db.collection("cats").remove({}, function(err, result) {

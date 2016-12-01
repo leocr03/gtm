@@ -16,14 +16,10 @@ var connect = function(callback) {
 }
 
 // Constants
-const PORT = 8080;
+const PORT = 8000;
 
 // App
 const app = express();
-app.get('/', function (req, res) {
-    console.log("main page");
-    res.send("this is the main page")
-});
 
 app.get('/insert', function (req, res) {
     connect(function(db){

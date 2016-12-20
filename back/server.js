@@ -5,7 +5,7 @@ const express = require('express');
 var mongoClient = require('mongodb').MongoClient;
 
 var connect = function(callback) {
-    mongoClient.connect('mongodb://db:27017/test', function(err, db) {
+    mongoClient.connect('mongodb://mongo:27017/test', function(err, db) {
         if (err) {
             console.log(err);
         } else {

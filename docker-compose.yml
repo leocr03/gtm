@@ -3,24 +3,24 @@ services:
   gtm:
     build: ./back/
     volumes:
-      - ./:/app
+     - ./:/app
     ports:
-      - "8000:8000"
+     - "8000:8000"
     links:
-      - mongo
+     - mongo
   gtm-front:
     build: ./front/
     volumes:
-      - ./:/app
+     - ./:/app
     ports:
-      - "18000:18000"
+     - "18000:8080"
     links:
-      - tomcat
+     - tomcat
   mongo:
     image: mongo
     ports:
-      - "27017:27017"
+     - "27017:27017"
   tomcat:
     image: tomcat
     ports:
-      - "8080:8080"
+     - "8080:8080"

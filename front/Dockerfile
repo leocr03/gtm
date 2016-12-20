@@ -4,4 +4,4 @@ RUN mkdir /usr/local/tomcat/webapps/gtm-front
 
 COPY *.html /usr/local/tomcat/webapps/gtm-front/
 
-EXPOSE 18000
+EXPOSE 8080

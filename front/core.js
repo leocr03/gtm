@@ -1,6 +1,8 @@
 var gtmModule = angular.module('gtmModule', []);
 
 function gtmController($scope, $http) {
+
+
 //    $http.get('/api/todos')
 //        .success(function(data) {
 //            $scope.todos = data;

@@ -37,7 +37,7 @@ app.get('/show', function (req, res) {
 
 app.get('/clean', function (req, res) {
     connect(function(db){
-        console.log("showing objects in Mongo");
+        console.log("cleaning objects in Mongo");
         clean(res, db);
     });
 });
@@ -54,15 +54,6 @@ var show = function(res, db) {
         res.send(data);
     });
 };
-
-/*
-var show = function(res, db) {
-    db.collection("cats").find({}, function(err, docs) {
-        console.log(docs);
-        res.json(docs);
-    });
-}
-*/
 
 var clean = function(res, db) {
     db.collection("cats").remove({}, function(err, result) {

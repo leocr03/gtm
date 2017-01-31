@@ -16,14 +16,22 @@
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
-    <script src="core.js"></script>
+    <script src="front.js"></script>
 
 </head>
 <body>
 
 <div ng-app="gtmModule" ng-controller="gtmController">
     <div class="container">
+        <p id="pResult">The result is [{{result}}]</p>
 
+        <button ng-click="insert()">Insert</button>
+        <br/>
+        <br/>
+        <button ng-click="show()">Show</button>
+        <br/>
+        <br/>
+        <button ng-click="clean()">Clean</button>
     </div>
 </div>
 

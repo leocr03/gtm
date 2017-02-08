@@ -1,6 +1,7 @@
 version: "2"
 services:
   gtm:
+    hostname: gtm
     build: ./back/
     volumes:
      - ./:/app
@@ -9,6 +10,7 @@ services:
     links:
      - mongo
   gtm-front:
+    hostname: gtm-front
     build: ./front/
     volumes:
      - ./:/app
@@ -17,10 +19,12 @@ services:
     links:
      - tomcat
   mongo:
+    hostname: mongo
     image: mongo
     ports:
      - "27017:27017"
   tomcat:
+    hostname: tomcat
     image: tomcat
     ports:
      - "8080:8080"

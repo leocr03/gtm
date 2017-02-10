@@ -4,7 +4,7 @@ function gtmController($scope, $http) {
     $scope.result = -1;
 
     $scope.insert = function() {
-        $http.post('http://localhost:8000/insert')
+        $http.post('/insert')
             .success(function(data) {
                 $scope.result = data;
                 console.log(data);
@@ -16,7 +16,7 @@ function gtmController($scope, $http) {
     };
 
     $scope.show = function() {
-        $http.get('http://localhost:8000/show')
+        $http.get('/show')
             .success(function(data) {
                 $scope.result = data;
                 console.log(data);
@@ -28,7 +28,7 @@ function gtmController($scope, $http) {
     };
 
     $scope.clean = function() {
-        $http.delete('http://localhost:8000/clean')
+        $http.delete('/clean')
             .success(function(data) {
                 $scope.result = data;
                 console.log(data);
@@ -40,7 +40,7 @@ function gtmController($scope, $http) {
     };
 
     $scope.count = function() {
-        $http.get('http://localhost:8000/count')
+        $http.get('/count')
             .success(function(data) {
                 $scope.result = data;
                 console.log(data);

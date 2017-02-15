@@ -91,8 +91,9 @@ var clean = function(res, db) {
 
 var count = function(res, db) {
     db.collection("cats").count({}, function(err, result) {
+        console.log("counting objects in Mongo: " + result);
         db.close();
-        res.send(result);
+        res.send("" + result);
     });
 };
 

@@ -32,28 +32,28 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use(express.static(__dirname + '/back'));
+app.use(express.static(__dirname + '/public'));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({'extended':'true'}));            // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());                                     // parse application/json
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
 
-app.post('/insert', function (req, res) {
+app.post('/api/insert', function (req, res) {
     connect(function(db){
         console.log("inserting object in Mongo");
         insert(res, db);
     });
 });
 
-app.get('/show', function (req, res) {
+app.get('/api/show', function (req, res) {
     connect(function(db){
         console.log("showing objects in Mongo");
         show(res, db);
     });
 });
 
-app.delete('/clean', function (req, res) {
+app.delete('/api/clean', function (req, res) {
     connect(function(db){
         console.log("cleaning objects in Mongo");
         clean(res, db);
@@ -61,7 +61,7 @@ app.delete('/clean', function (req, res) {
 });
 
 
-app.get('/count', function (req, res) {
+app.get('/api/count', function (req, res) {
     connect(function(db){
         console.log("cleaning objects in Mongo");
         count(res, db);

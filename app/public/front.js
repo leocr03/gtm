@@ -4,7 +4,7 @@ function gtmController($scope, $http) {
     $scope.result = -1;
 
     $scope.insert = function() {
-        $http.post('/insert')
+        $http.post('/api/insert')
             .success(function(data) {
                 $scope.result = data;
                 console.log(data);
@@ -16,7 +16,7 @@ function gtmController($scope, $http) {
     };
 
     $scope.show = function() {
-        $http.get('/show')
+        $http.get('/api/show')
             .success(function(data) {
                 $scope.result = data;
                 console.log(data);
@@ -28,7 +28,7 @@ function gtmController($scope, $http) {
     };
 
     $scope.clean = function() {
-        $http.delete('/clean')
+        $http.delete('/api/clean')
             .success(function(data) {
                 $scope.result = data;
                 console.log(data);
@@ -40,7 +40,7 @@ function gtmController($scope, $http) {
     };
 
     $scope.count = function() {
-        $http.get('/count')
+        $http.get('/api/count')
             .success(function(data) {
                 $scope.result = data;
                 console.log(data);

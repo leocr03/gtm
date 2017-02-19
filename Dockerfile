@@ -9,7 +9,7 @@ COPY package.json /usr/src/app/
 RUN npm install
 
 # Bundle app source
-COPY ./app/* /usr/src/app/
+COPY ./app/ /usr/src/app/
 
 EXPOSE 8000
 

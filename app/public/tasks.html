@@ -1,0 +1,41 @@
+<!doctype html>
+
+<html ng-app="gtmModule">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>gtm</title>
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <style>
+        html                    { overflow-y:scroll; }
+        body                    { padding-top:50px; }
+        #todo-list              { margin-bottom:30px; }
+    </style>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+    <script src="front.js"></script>
+
+</head>
+<body>
+<div ng-app="gtmModule" ng-controller="gtmController">
+    <div class="container">
+        <p id="pResult">The result is [{{result}}]</p>
+
+        <button ng-click="insert()">Insert</button>
+        <br/>
+        <br/>
+        <button ng-click="show()">Show</button>
+        <br/>
+        <br/>
+        <button ng-click="clean()">Clean</button>
+        <br/>
+        <br/>
+        <button ng-click="count()">Count</button>
+    </div>
+</div>
+
+</body>
+</html>

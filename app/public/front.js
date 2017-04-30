@@ -1,35 +1,15 @@
-var gtmModule = angular.module('gtmModule', ['ui.grid']).controller("gtmController", function($scope, $http) {
-    $scope.result = -1;
+var gtmModule = angular.module('gtmModule', ['ui.grid', 'ui.grid.edit', 'ui.grid.rowEdit', 'ui.grid.cellNav']);
 
-    $scope.myData = [
-        {
-            "firstName": "Cox",
-            "lastName": "Carney",
-            "company": "Enormo",
-            "employed": true
-        },
-        {
-            "firstName": "Lorraine",
-            "lastName": "Wise",
-            "company": "Comveyer",
-            "employed": false
-        },
-        {
-            "firstName": "Nancy",
-            "lastName": "Waters",
-            "company": "Fuelton",
-            "employed": false
-        }
-    ];
+gtmModule.controller("gtmController", function ($scope, $http, $q, $interval) {
+    $scope.gridOptions = {};
 
     $scope.insert = function() {
         $http.post('/api/insert')
             .success(function(data) {
-                $scope.result = data;
+                $scope.show();
                 console.log(data);
             })
             .error(function(data) {
-                $scope.result = data;
                 console.log('Error: ' + data);
             });
     };
@@ -37,11 +17,10 @@ var gtmModule = angular.module('gtmModule', ['ui.grid']).controller("gtmControll
     $scope.show = function() {
         $http.get('/api/show')
             .success(function(data) {
-                $scope.result = data;
+                $scope.gridOptions.data = data;
                 console.log(data);
             })
             .error(function(data) {
-                $scope.result = data;
                 console.log('Error: ' + data);
             });
     };
@@ -49,11 +28,10 @@ var gtmModule = angular.module('gtmModule', ['ui.grid']).controller("gtmControll
     $scope.clean = function() {
         $http.delete('/api/clean')
             .success(function(data) {
-                $scope.result = data;
+                $scope.show();
                 console.log(data);
             })
             .error(function(data) {
-                $scope.result = data;
                 console.log('Error: ' + data);
             });
     };
@@ -61,12 +39,31 @@ var gtmModule = angular.module('gtmModule', ['ui.grid']).controller("gtmControll
     $scope.count = function() {
         $http.get('/api/count')
             .success(function(data) {
-                $scope.result = data;
+                $scope.show();
                 console.log(data);
             })
             .error(function(data) {
-                $scope.result = data;
                 console.log('Error: ' + data);
             });
     };
+
+    $scope.gridOptions.columnDefs = [
+        { name: '_id', enableCellEdit: false },
+        { name: 'name', displayName: 'Name' }
+    ];
+
+    $scope.saveRow = function( rowEntity ) {
+        var promise = $q.defer();
+        $scope.gridApi.rowEdit.setSavePromise( rowEntity, promise.promise );
+        $interval( function() {
+            promise.resolve();
+        }, 3000, 1);
+    };
+
+    $scope.gridOptions.onRegisterApi = function(gridApi) {
+        $scope.gridApi = gridApi;
+        gridApi.rowEdit.on.saveRow($scope, $scope.saveRow);
+    };
+
+    $scope.show();
 });

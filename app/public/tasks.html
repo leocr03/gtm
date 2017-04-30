@@ -1,5 +1,4 @@
 <!doctype html>
-
 <html>
 <head>
     <meta charset="utf-8">
@@ -20,10 +19,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-resource.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js"></script>
     <script src="https://cdn.rawgit.com/angular-ui/bower-ui-grid/master/ui-grid.min.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/csv.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/pdfmake.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/vfs_fonts.js"></script>
     <script src="front.js"></script>
 </head>
 <body>
-<div ng-app="gtmModule" ng-controller="gtmController">
+<div ng-app="gtmModule" ng-controller="gtmController" ng-load="init()">
 
     <div>
         <button ng-click="insert()">Add New Task</button>
@@ -34,34 +36,11 @@
 
     <div>
         <div>
-            <div id="grid1" ui-grid="{ data: myData }" class="grid"></div>
+            <div id="grid1" ui-grid="gridOptions" ui-grid-edit ui-grid-row-edit ui-grid-cellNav class="grid"></div>
         </div>
-        <table st-table="rowCollection" class="table table-striped">
-            <thead>
-            <tr>
-                <th>Finished</th>
-                <th>Tasks</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Operations</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="row in rowCollection">
-                <td>{{row.firstName}}</td>
-                <td>{{row.lastName}}</td>
-                <td>{{row.birthDate}}</td>
-                <td>{{row.balance}}</td>
-                <td>{{row.email}}</td>
-            </tr>
-            </tbody>
-        </table>
     </div>
-
     <div>
         <div class="container">
-            <p id="pResult">The result is [{{result}}]</p>
-
             <br/>
             <br/>
             <button ng-click="show()">Show</button>
@@ -74,6 +53,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>

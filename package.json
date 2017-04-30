@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "General Task Manager project",
   "author": "Leonardo Cristofari <leocr03@gmail.com>",
-  "main": "server.js",
+  "main": "app/server.js",
   "scripts": {
     "start": "node server.js"
   },

@@ -17,23 +17,47 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
     <script src="front.js"></script>
-
 </head>
 <body>
 <div ng-app="gtmModule" ng-controller="gtmController">
-    <div class="container">
-        <p id="pResult">The result is [{{result}}]</p>
+    <div>
+        <table st-table="rowCollection" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Finished</th>
+                <th>Tasks</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Operations</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="row in rowCollection">
+                <td>{{row.firstName}}</td>
+                <td>{{row.lastName}}</td>
+                <td>{{row.birthDate}}</td>
+                <td>{{row.balance}}</td>
+                <td>{{row.email}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-        <button ng-click="insert()">Insert</button>
-        <br/>
-        <br/>
-        <button ng-click="show()">Show</button>
-        <br/>
-        <br/>
-        <button ng-click="clean()">Clean</button>
-        <br/>
-        <br/>
-        <button ng-click="count()">Count</button>
+    <div>
+        <div class="container">
+            <p id="pResult">The result is [{{result}}]</p>
+
+            <button ng-click="insert()">Insert</button>
+            <br/>
+            <br/>
+            <button ng-click="show()">Show</button>
+            <br/>
+            <br/>
+            <button ng-click="clean()">Clean</button>
+            <br/>
+            <br/>
+            <button ng-click="count()">Count</button>
+        </div>
     </div>
 </div>
 

@@ -3,9 +3,9 @@ services:
   gtm:
     container_name: gtm
     hostname: gtm
-    build: ./
+    build: .
 #    volumes:
-#     - ./app:/tmp/app
+#     - ./app:/usr/src/app
     ports:
      - "8000:8000"
     links:

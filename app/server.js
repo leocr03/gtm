@@ -2,7 +2,8 @@
 
 const express = require('express');
 
-var mongoClient = require('mongodb').MongoClient;
+var mongodb = require('mongodb');
+var mongoClient = mongodb.MongoClient;
 
 var connect = function(callback) {
     mongoClient.connect('mongodb://mongo:27017/test', function(err, db) {
@@ -55,11 +56,18 @@ app.get('/api/show', function (req, res) {
 
 app.delete('/api/clean', function (req, res) {
     connect(function(db){
-        console.log("cleaning objects in Mongo");
-        clean(res, db);
+        console.log("cleaning all objects in Mongo");
+        clean(res, db, null);
     });
 });
 
+app.delete('/api/clean/:id', function (req, res) {
+    connect(function(db){
+        var id = req.params.id;
+        console.log("cleaning objects in Mongo with id [" + id + "]");
+        clean(res, db, id);
+    });
+});
 
 app.get('/api/count', function (req, res) {
     connect(function(db){
@@ -82,11 +90,18 @@ var show = function(res, db) {
     });
 };
 
-var clean = function(res, db) {
-    db.collection("cats").remove({}, function(err, result) {
-        db.close();
-        res.send("objects removed");
-    });
+var clean = function(res, db, id) {
+    if (id != null) {
+        db.collection("cats").deleteOne({ "_id": new mongodb.ObjectID('' + id)}, function(err, result) {
+            db.close();
+            res.send("objects of id [" + id +"] removed");
+        });
+    } else {
+        db.collection("cats").remove({}, function(err, result) {
+            db.close();
+            res.send("objects removed");
+        });
+    }
 };
 
 var count = function(res, db) {

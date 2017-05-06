@@ -36,6 +36,17 @@ gtmModule.controller("gtmController", function ($scope, $http, $q, $interval) {
             });
     };
 
+    $scope.removeRow = function(id) {
+        $http.delete('/api/clean/' + id)
+            .success(function(data) {
+                $scope.show();
+                console.log(data);
+            })
+            .error(function(data) {
+                console.log('Error: ' + data);
+            });
+    };
+
     $scope.count = function() {
         $http.get('/api/count')
             .success(function(data) {
@@ -49,7 +60,8 @@ gtmModule.controller("gtmController", function ($scope, $http, $q, $interval) {
 
     $scope.gridOptions.columnDefs = [
         { name: '_id', enableCellEdit: false },
-        { name: 'name', displayName: 'Name' }
+        { displayName: 'Name', name: 'name'},
+        { displayName: 'Options', name: 'options', cellTemplate: '<button class="btn primary" ng-click="grid.appScope.deleteRow(row)">Remove</button>'}
     ];
 
     $scope.saveRow = function( rowEntity ) {
@@ -58,6 +70,13 @@ gtmModule.controller("gtmController", function ($scope, $http, $q, $interval) {
         $interval( function() {
             promise.resolve();
         }, 3000, 1);
+    };
+
+    $scope.deleteRow = function(row) {
+        var index = $scope.gridOptions.data.indexOf(row.entity);
+        var id = row.entity._id;
+        $scope.gridOptions.data.splice(index, 1);
+        $scope.removeRow(id)
     };
 
     $scope.gridOptions.onRegisterApi = function(gridApi) {
